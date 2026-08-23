@@ -1,0 +1,103 @@
+1️⃣ Agent sends daily sketch + poll to Telegram 2️⃣ User votes: 👍 Like (want more) or ✅ Done (want new) 3️⃣ Next day:
+
+👍 Liked → Same theme, different drawing (goes deeper!)
+✅ Done → Smoothly shifts to CONNECTED theme (not random!)
+
+### Connected Theme Map:
+Animals ←→ Plants ←→ Insects ←→ Birds ↕ ↕ ↕ ↕ Sea Life ←→ Weather ←→ Space ←→ Fantasy ↕ ↕ ↕ ↕ Dinosaurs ←→ Vehicles ←→ Buildings ←→ Food
+
+
+---
+
+## 🧬 Agent Evolution Stages
+
+| Stage | Condition | Behavior |
+|-------|-----------|----------|
+| 🌱 Day 1 | First generation | Uses daily schedule |
+| 🌿 Learning | 1-2 sketches | Starts reading feedback |
+| 🌳 Adapting | 3-6 sketches | Actively adapts themes |
+| 🌟 Personalizing | 7-13 sketches | Deep personalization |
+| ⭐ Expert | 14+ sketches | Fully personalized experience |
+
+---
+
+## 🚀 Setup Guide
+
+### Prerequisites
+- AWS Account (Free Tier)
+- Cloudflare Account (Free)
+- Telegram Bot (via BotFather)
+
+### Step 1: Create DynamoDB Table
+- Table name: `BrainSparkHistory`
+- Partition key: `date` (String)
+
+### Step 2: Create S3 Bucket
+- Bucket name: `brainspark-dashboard-[yourname]`
+- Enable Static Website Hosting
+- Set public read bucket policy
+
+### Step 3: Create Lambda Function
+- Runtime: Python 3.12
+- Timeout: 60 seconds
+- Memory: 256 MB
+- Paste code from `lambda_function.py`
+
+### Step 4: Set Environment Variables
+TELEGRAM_BOT_TOKEN=your_bot_token TELEGRAM_CHAT_ID=your_chat_id CLOUDFLARE_ACCOUNT_ID=your_account_id CLOUDFLARE_API_TOKEN=your_api_token S3_BUCKET_NAME=your_bucket_name DYNAMODB_TABLE=BrainSparkHistory
+
+
+### Step 5: Create EventBridge Schedule
+- Cron: `30 1 * * ? *` (7:00 AM IST)
+- Target: BrainSparkAgent Lambda
+
+### Step 6: Add IAM Permissions
+Lambda role needs:
+- `AmazonDynamoDBFullAccess`
+- `AmazonS3FullAccess`
+
+---
+
+## 💰 Cost: $0.00
+
+| Service | Free Tier Limit | Our Usage |
+|---------|----------------|-----------|
+| Lambda | 1M requests/month | ~30/month |
+| DynamoDB | 25GB storage | < 1MB |
+| S3 | 5GB storage | < 10MB |
+| EventBridge | Free | 1 rule |
+| Cloudflare AI | 10,000/day | 1/day |
+| Telegram | Unlimited | Free |
+
+---
+
+## 🎨 Theme Categories (12 Themes, 180 Sub-topics)
+
+- 🐾 Animals (15 sub-topics)
+- 🌿 Plants & Flowers (15 sub-topics)
+- 🚗 Vehicles (15 sub-topics)
+- 🐙 Sea Creatures (15 sub-topics)
+- 🦜 Birds (15 sub-topics)
+- 🦋 Insects (15 sub-topics)
+- 🦄 Fantasy (15 sub-topics)
+- 🚀 Space (15 sub-topics)
+- 🦕 Dinosaurs (15 sub-topics)
+- 🍕 Food & Fruits (15 sub-topics)
+- 🌈 Weather (15 sub-topics)
+- 🏰 Buildings (15 sub-topics)
+
+---
+
+## 📄 License
+
+MIT License — Free to use, modify, and distribute.
+
+---
+
+## 🏆 Built For
+
+**AWS Weekend Challenge: Set Your Creative App Free** (August 2026)
+
+---
+
+*Built with ❤️ by Madhan*
